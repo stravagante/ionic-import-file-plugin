@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="ionic-import-file-plugin"
+      version="1.0.0">
+    <name>Ionic Import File Plugin</name>
+    <description>Ionic Import File Plugin</description>
+    <license>MIT</license>
+    <keywords>ionic,import,open,file,url</keywords>
+    <repo>https://github.com/stravagante/ionic-import-file-plugin</repo>
+    <engines>
+        <engine name="cordova-ios" version=">=4.3.1" />
+    </engines>
+    <js-module src="www/IonicImportFilePlugin.js" name="IonicImportFile">
+        <clobbers target="window.IonicImportFilePlugin" />
+    </js-module>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IonicImportFilePlugin">
+                <param name="ios-package" value="IonicImportFilePlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+    
+        <config-file target="*-Info.plist" parent="CFBundleDocumentTypes">
+            <!-- Modify to register the types of files you would like to handle -->
+            <array>
+                <dict>
+                    <key>CFBundleTypeName</key>
+                    <string>ZIP</string>
+                    <key>LSHandlerRank</key>
+                    <string>Alternate</string>
+                    <key>LSItemContentTypes</key>
+                    <array>
+                        <string>com.pkware.zip-archive</string>
+                    </array>
+                </dict>
+            </array>
+            <!-- End Modify -->
+            
+        </config-file>
+        
+        <header-file src="src/ios/IonicImportFilePlugin.h" />
+        <source-file src="src/ios/IonicImportFilePlugin.m" />
+        <source-file src="src/ios/AppDelegate+IonicImportFilePlugin.m" />
+    </platform>
+</plugin>
